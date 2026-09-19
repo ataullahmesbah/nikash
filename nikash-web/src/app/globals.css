@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-bengali);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+/* পেজ বদলানোর সময় উপরে সরু অগ্রগতি বার।
+   loading.tsx রেন্ডার হলেই এটা দেখা যায়, নেভিগেশন শেষ হলে নিজে থেকেই
+   চলে যায় — আলাদা কোনো JS লাগে না। */
+@keyframes nk-progress {
+  0%   { transform: translateX(-100%) scaleX(0.35); }
+  50%  { transform: translateX(0%)    scaleX(0.55); }
+  100% { transform: translateX(100%)  scaleX(0.35); }
+}
+
+.nk-progress-bar {
+  animation: nk-progress 1.1s ease-in-out infinite;
+  transform-origin: left center;
+}
+
+/* চলাফেরা কমানোর সেটিং চালু থাকলে অ্যানিমেশন বন্ধ */
+@media (prefers-reduced-motion: reduce) {
+  .nk-progress-bar { animation: none; opacity: 0.6; }
+}

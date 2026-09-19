@@ -1,0 +1,31 @@
+# EAS Build-এ কোন ফাইলগুলো পাঠানো হবে না।
+#
+# ⚠️ এই ফাইলটা থাকলে EAS `.gitignore` নয়, এটাই মানে।
+#
+# কেন দরকার: `.gitignore`-এ `.env` আছে (ঠিকই আছে — GitHub-এ যাওয়া
+# উচিত নয়)। কিন্তু EAS git-ignored ফাইল সার্ভারে পাঠায় না, ফলে বিল্ডের
+# সময় EXPO_PUBLIC_* মানগুলো ফাঁকা থেকে যেত আর APK খুললেই ক্র্যাশ করত।
+#
+# এখানে `.env` বাদ দিইনি, তাই সেটা বিল্ড সার্ভারে যাবে।
+#
+# নিরাপত্তা: `.env`-এ শুধু EXPO_PUBLIC_* মান আছে — Supabase URL ও anon
+# key। এগুলো এমনিতেই APK-র ভেতরে ঢোকে, যে কেউ খুলে দেখতে পারে। আসল
+# সুরক্ষা RLS নীতিতে। service_role key এখানে কখনোই রাখবেন না।
+
+node_modules/
+.expo/
+dist/
+web-build/
+android/
+ios/
+.git/
+
+*.log
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+.DS_Store
+*.tsbuildinfo
+
+# স্থানীয় ডেমো লগইন — বিল্ডে দরকার নেই
+.env.local

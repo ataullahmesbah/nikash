@@ -15,7 +15,8 @@
         {
           "locationAlwaysAndWhenInUsePermission": "পার্টির অবস্থান GPS দিয়ে সংরক্ষণ করার জন্য নিকাশ-এর আপনার লোকেশন প্রয়োজন।"
         }
-      ]
+      ],
+      "@react-native-community/datetimepicker"
     ],
     "ios": {
       "supportsTablet": true,

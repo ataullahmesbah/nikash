@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Animated, Easing, Image, StyleSheet, Text, View } from "react-native";
 import { router } from "expo-router";
 import Constants from "expo-constants";
+import { supabaseConfigError } from "@/lib/supabase";
 import { useAuth } from "@/lib/auth-context";
 import { hasSeenOnboarding } from "@/lib/onboarding";
 import { toBnDigits } from "@/lib/format";
@@ -63,6 +64,8 @@ export default function SplashScreen() {
 
   // সেশন যাচাই শেষ আর ন্যূনতম সময়ও পার — তবেই এগোব
   useEffect(() => {
+    // সেটিংসই নেই — এগোনোর মানে হয় না, পর্দায় কারণটা দেখাব
+    if (supabaseConfigError) return;
     if (loading || !ready) return;
 
     if (session) {
@@ -79,6 +82,33 @@ export default function SplashScreen() {
     inputRange: [0, 1],
     outputRange: [-110, 110],
   });
+
+  // ---------- সেটিংস মিসিং: অ্যাপ বন্ধ না করে কারণটা দেখাই ----------
+  //
+  // APK বানানোর সময় .env বিল্ড সার্ভারে না পৌঁছালে এটাই হয়। আগে অ্যাপ
+  // চুপচাপ বন্ধ হয়ে যেত, কিছুই বোঝা যেত না।
+  if (supabaseConfigError) {
+    return (
+      <View style={[styles.container, { padding: 28 }]}>
+        <Text style={styles.errIcon}>⚙️</Text>
+        <Text style={styles.errTitle}>অ্যাপের সেটিংস পাওয়া যায়নি</Text>
+        <Text style={styles.errBody}>
+          সার্ভারের ঠিকানা অ্যাপের ভেতরে ঢোকেনি, তাই কিছু দেখানো যাচ্ছে না।
+          এটি অ্যাপ তৈরির সময়ের ভুল — আপনার ফোনের কোনো সমস্যা নয়।
+        </Text>
+
+        <View style={styles.errBox}>
+          <Text style={styles.errBoxLabel}>যা নেই</Text>
+          <Text style={styles.errBoxValue}>{supabaseConfigError}</Text>
+        </View>
+
+        <Text style={styles.errHint}>
+          অনুগ্রহ করে এই লেখাটি সাপোর্টে জানান — নতুন সংস্করণ দিয়ে ঠিক করা হবে।
+        </Text>
+        <Text style={styles.version}>সংস্করণ {toBnDigits(version)}</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -156,4 +186,37 @@ const styles = StyleSheet.create({
     backgroundColor: theme.accent,
   },
   version: { fontSize: 11.5, color: theme.textFaint, letterSpacing: 0.3 },
+
+  // সেটিংস মিসিং পর্দা
+  errIcon: { fontSize: 46, marginBottom: 14 },
+  errTitle: {
+    fontSize: 20,
+    fontWeight: "800",
+    color: theme.text,
+    textAlign: "center",
+    marginBottom: 10,
+  },
+  errBody: {
+    fontSize: 13.5,
+    color: theme.textMuted,
+    textAlign: "center",
+    lineHeight: 21,
+  },
+  errBox: {
+    marginTop: 18,
+    alignSelf: "stretch",
+    backgroundColor: theme.dangerBg,
+    borderRadius: 12,
+    padding: 13,
+    gap: 4,
+  },
+  errBoxLabel: { fontSize: 11, color: theme.danger, fontWeight: "700" },
+  errBoxValue: { fontSize: 12.5, color: theme.text, lineHeight: 19 },
+  errHint: {
+    marginTop: 16,
+    fontSize: 12.5,
+    color: theme.textMuted,
+    textAlign: "center",
+    lineHeight: 19,
+  },
 });

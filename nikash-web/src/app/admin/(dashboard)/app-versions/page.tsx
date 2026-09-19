@@ -1,5 +1,6 @@
 import { supabaseAdmin } from "@/lib/supabase/admin";
 import AddVersionForm from "./_components/add-version-form";
+import VersionRowActions from "./_components/version-row-actions";
 
 export const dynamic = "force-dynamic";
 
@@ -34,6 +35,7 @@ export default async function AppVersionsPage() {
               <th className="px-4 py-3">সর্বনিম্ন সমর্থিত</th>
               <th className="px-4 py-3">জরুরি</th>
               <th className="px-4 py-3">প্রকাশিত</th>
+              <th className="px-4 py-3"></th>
             </tr>
           </thead>
           <tbody>
@@ -62,14 +64,28 @@ export default async function AppVersionsPage() {
                     <span className="text-slate-400">না</span>
                   )}
                 </td>
-                <td className="px-4 py-3 text-slate-600">
+                <td className="whitespace-nowrap px-4 py-3 text-slate-600">
                   {new Date(v.released_at).toLocaleDateString("bn-BD")}
+                </td>
+                <td className="px-4 py-3">
+                  <VersionRowActions
+                    version={{
+                      id: v.id,
+                      version: v.version,
+                      build_number: v.build_number,
+                      apk_url: v.apk_url,
+                      file_size_mb: v.file_size_mb,
+                      release_notes: v.release_notes,
+                      min_supported: v.min_supported,
+                      force_update: v.force_update,
+                    }}
+                  />
                 </td>
               </tr>
             ))}
             {(versions ?? []).length === 0 && (
               <tr>
-                <td colSpan={6} className="px-4 py-8 text-center text-slate-400">
+                <td colSpan={7} className="px-4 py-8 text-center text-slate-400">
                   এখনো কোনো ভার্সন প্রকাশিত হয়নি
                 </td>
               </tr>

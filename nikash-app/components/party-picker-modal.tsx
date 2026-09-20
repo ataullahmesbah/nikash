@@ -54,6 +54,7 @@ export function PartyPickerModal({
         <TextInput
           style={styles.search}
           placeholder="নাম বা ফোন দিয়ে খুঁজুন..."
+          placeholderTextColor={theme.textFaint}
           value={q}
           onChangeText={setQ}
           autoFocus
@@ -106,7 +107,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     paddingHorizontal: 14,
     paddingVertical: 12,
-  },
+   color: theme.text,},
   addNew: {
     marginTop: 10,
     marginBottom: 6,

@@ -4,6 +4,7 @@ import { Stack, router } from "expo-router";
 import * as Crypto from "expo-crypto";
 import { useAuth } from "@/lib/auth-context";
 import { useToast } from "@/lib/toast/toast-context";
+import { errorMessage, toastMessage } from "@/lib/errors";
 import { enqueueWriteAndSync } from "@/lib/offline/sync-queue";
 import { loadCatalog, type PickableUnit } from "@/lib/catalog";
 import { loadLocations, type Location } from "@/lib/locations";
@@ -84,9 +85,9 @@ export default function StockAdjustScreen() {
       toast.success("স্টক সমন্বয় সংরক্ষিত হয়েছে (sync হচ্ছে)");
       router.back();
     } catch (e) {
-      const message = e instanceof Error ? e.message : "ব্যর্থ হয়েছে";
+      const message = errorMessage(e, "ব্যর্থ হয়েছে");
       setError(message);
-      toast.error(message.length > 60 ? "সংরক্ষণ ব্যর্থ, আবার চেষ্টা করুন" : message);
+      toast.error(toastMessage(e, "ব্যর্থ হয়েছে"));
     } finally {
       setLoading(false);
     }

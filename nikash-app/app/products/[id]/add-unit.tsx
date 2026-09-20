@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ScrollView, Switch, Text, View } from "react-native";
 import { Stack, router, useLocalSearchParams } from "expo-router";
 import { supabase } from "@/lib/supabase";
+import { errorMessage, toastMessage } from "@/lib/errors";
 import { useAuth } from "@/lib/auth-context";
 import { ErrorText, FormField, PrimaryButton } from "@/components/form";
 
@@ -64,7 +65,7 @@ export default function AddUnitLevelScreen() {
       if (insErr) throw insErr;
       router.back();
     } catch (e) {
-      setError(e instanceof Error ? e.message : "সংরক্ষণ ব্যর্থ হয়েছে");
+      setError(errorMessage(e, "সংরক্ষণ ব্যর্থ হয়েছে"));
     } finally {
       setLoading(false);
     }

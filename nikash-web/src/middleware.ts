@@ -24,12 +24,23 @@ export async function middleware(req: NextRequest) {
   const isLoginPath =
     pathname === "/admin/login" || pathname.startsWith("/api/admin/login");
 
+  const token = req.cookies.get(COOKIE_NAME)?.value;
+
+  // লগইন পাতায় এসে সেশন আগে থেকেই বৈধ পেলে ফর্ম না দেখিয়ে সোজা
+  // ড্যাশবোর্ডে পাঠাই। (শুধু পাতাটা — /api/admin/login-এর POST গুলো
+  // খোলা থাকতেই হবে, নইলে কেউ লগইনই করতে পারবে না।)
+  if (pathname === "/admin/login") {
+    if (await isValidSession(token)) {
+      return NextResponse.redirect(new URL("/admin", req.url));
+    }
+    return NextResponse.next();
+  }
+
   const isAdminRoute = pathname.startsWith("/admin") && !isLoginPath;
   const isAdminApiRoute = pathname.startsWith("/api/admin") && !isLoginPath;
 
   if (!isAdminRoute && !isAdminApiRoute) return NextResponse.next();
 
-  const token = req.cookies.get(COOKIE_NAME)?.value;
   const valid = await isValidSession(token);
 
   if (!valid) {

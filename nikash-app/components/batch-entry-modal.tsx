@@ -47,6 +47,7 @@ export function BatchEntryModal({
             value={batchNo}
             onChangeText={setBatchNo}
             placeholder="প্যাকেটের গায়ে যা লেখা"
+            placeholderTextColor={theme.textFaint}
           />
 
           <Text style={styles.label}>মেয়াদ শেষের তারিখ (ঐচ্ছিক)</Text>

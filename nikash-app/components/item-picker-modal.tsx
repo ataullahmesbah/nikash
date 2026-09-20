@@ -42,6 +42,7 @@ export function ItemPickerModal({
         <TextInput
           style={styles.search}
           placeholder="প্রোডাক্ট খুঁজুন..."
+          placeholderTextColor={theme.textFaint}
           value={q}
           onChangeText={setQ}
           autoFocus
@@ -110,7 +111,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     paddingVertical: 12,
     marginBottom: 12,
-  },
+   color: theme.text,},
   addNew: {
     marginTop: 10,
     marginBottom: 6,

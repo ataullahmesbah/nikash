@@ -3,6 +3,7 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Stack, router, useLocalSearchParams } from "expo-router";
 import * as Crypto from "expo-crypto";
 import { supabase } from "@/lib/supabase";
+import { errorMessage, toastMessage } from "@/lib/errors";
 import { useAuth } from "@/lib/auth-context";
 import { useToast } from "@/lib/toast/toast-context";
 import { ErrorText, FormField, PrimaryButton, SegmentedControl } from "@/components/form";
@@ -169,9 +170,9 @@ export default function NewPaymentScreen() {
       toast.success("পেমেন্ট সংরক্ষিত হয়েছে");
       router.back();
     } catch (e) {
-      const message = e instanceof Error ? e.message : "সংরক্ষণ ব্যর্থ হয়েছে";
+      const message = errorMessage(e, "সংরক্ষণ ব্যর্থ হয়েছে");
       setError(message);
-      toast.error(message.length > 60 ? "সংরক্ষণ ব্যর্থ, আবার চেষ্টা করুন" : message);
+      toast.error(toastMessage(e, "সংরক্ষণ ব্যর্থ হয়েছে"));
     } finally {
       setLoading(false);
     }

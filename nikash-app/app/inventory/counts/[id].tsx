@@ -5,6 +5,7 @@ import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/lib/auth-context";
 import { useToast } from "@/lib/toast/toast-context";
 import { PrimaryButton } from "@/components/form";
+import { theme } from "@/components/ui";
 
 type CountItem = {
   id: string;
@@ -141,6 +142,7 @@ export default function StockCountDetailScreen() {
         <TextInput
           style={styles.search}
           placeholder="প্রোডাক্ট খুঁজুন..."
+          placeholderTextColor={theme.textFaint}
           value={search}
           onChangeText={setSearch}
         />
@@ -169,6 +171,7 @@ export default function StockCountDetailScreen() {
                 value={value}
                 onChangeText={(v) => setEdits((prev) => ({ ...prev, [item.id]: v }))}
                 placeholder="আসল"
+                placeholderTextColor={theme.textFaint}
               />
             </View>
           );
@@ -200,7 +203,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingHorizontal: 12,
     paddingVertical: 8,
-  },
+   color: theme.text,},
   list: { paddingHorizontal: 16, paddingBottom: 16, gap: 8 },
   row: {
     flexDirection: "row",
@@ -222,6 +225,6 @@ const styles = StyleSheet.create({
     width: 70,
     padding: 8,
     textAlign: "center",
-  },
+   color: theme.text,},
   actions: { padding: 16, gap: 10, borderTopWidth: 1, borderTopColor: "#e2e8f0", backgroundColor: "#fff" },
 });

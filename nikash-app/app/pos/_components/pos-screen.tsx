@@ -16,6 +16,7 @@ import { loadCatalog, type PickableUnit } from "@/lib/catalog";
 import { PrimaryButton } from "@/components/form";
 import CloseShiftModal from "./close-shift-modal";
 import type { ActiveShift } from "../index";
+import { theme } from "@/components/ui";
 
 type CartLine = { unit: PickableUnit; qty: number };
 
@@ -136,6 +137,7 @@ export default function PosScreen({ shift, onClosed }: { shift: ActiveShift; onC
           <TextInput
             style={styles.search}
             placeholder="প্রোডাক্ট খুঁজুন..."
+            placeholderTextColor={theme.textFaint}
             value={search}
             onChangeText={setSearch}
           />
@@ -189,6 +191,7 @@ export default function PosScreen({ shift, onClosed }: { shift: ActiveShift; onC
             <TextInput
               style={styles.search}
               placeholder="কত টাকা দিয়েছে?"
+              placeholderTextColor={theme.textFaint}
               keyboardType="numeric"
               value={cashReceived}
               onChangeText={setCashReceived}
@@ -230,7 +233,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     marginBottom: 10,
     backgroundColor: "#fff",
-  },
+   color: theme.text,},
   tile: {
     flex: 1,
     backgroundColor: "#fff",

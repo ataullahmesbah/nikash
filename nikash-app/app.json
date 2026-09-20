@@ -15,8 +15,7 @@
         {
           "locationAlwaysAndWhenInUsePermission": "পার্টির অবস্থান GPS দিয়ে সংরক্ষণ করার জন্য নিকাশ-এর আপনার লোকেশন প্রয়োজন।"
         }
-      ],
-      "@react-native-community/datetimepicker"
+      ]
     ],
     "ios": {
       "supportsTablet": true,
@@ -25,34 +24,16 @@
     "android": {
       "package": "app.nikash.mobile",
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
+        "backgroundColor": "#059669",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false,
-      "permissions": [
-        "android.permission.ACCESS_COARSE_LOCATION",
-        "android.permission.ACCESS_FINE_LOCATION",
-        "android.permission.ACCESS_COARSE_LOCATION",
-        "android.permission.ACCESS_FINE_LOCATION"
-      ]
+      "predictiveBackGestureEnabled": false
     },
     "web": {
       "favicon": "./assets/favicon.png",
       "bundler": "metro"
-    },
-    "extra": {
-      "router": {},
-      "eas": {
-        "projectId": "789b98cc-7478-4aad-b0b5-d1c3fa78a381"
-      }
-    },
-    "runtimeVersion": {
-      "policy": "appVersion"
-    },
-    "updates": {
-      "url": "https://u.expo.dev/789b98cc-7478-4aad-b0b5-d1c3fa78a381"
     }
   }
 }

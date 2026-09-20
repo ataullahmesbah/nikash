@@ -3,11 +3,13 @@ import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-
 import { Stack, router } from "expo-router";
 import * as Crypto from "expo-crypto";
 import { supabase } from "@/lib/supabase";
+import { errorMessage, toastMessage } from "@/lib/errors";
 import { useAuth } from "@/lib/auth-context";
 import { useToast } from "@/lib/toast/toast-context";
 import { loadCatalog, type PickableUnit } from "@/lib/catalog";
 import { ErrorText, PrimaryButton, SegmentedControl } from "@/components/form";
 import { ItemPickerModal } from "@/components/item-picker-modal";
+import { theme } from "@/components/ui";
 
 type Location = { id: string; name: string };
 type TransferLine = { key: string; variantId: string; productName: string; variantName: string; qty: string };
@@ -86,7 +88,7 @@ export default function NewTransferScreen() {
       toast.success("স্থানান্তর পাঠানো হয়েছে");
       router.back();
     } catch (e) {
-      const message = e instanceof Error ? e.message : "ব্যর্থ হয়েছে";
+      const message = errorMessage(e, "ব্যর্থ হয়েছে");
       setError(message);
       toast.error(message.length > 60 ? "সংরক্ষণ ব্যর্থ, আবার চেষ্টা করুন" : message);
     } finally {
@@ -164,6 +166,6 @@ const styles = StyleSheet.create({
   },
   lineName: { fontSize: 14, fontWeight: "600", color: "#0f172a" },
   lineMeta: { fontSize: 12, color: "#64748b" },
-  qtyInput: { borderWidth: 1, borderColor: "#cbd5e1", borderRadius: 8, width: 60, padding: 8, textAlign: "center" },
+  qtyInput: { borderWidth: 1, borderColor: "#cbd5e1", borderRadius: 8, width: 60, padding: 8, textAlign: "center",  color: theme.text,},
   remove: { color: "#dc2626", fontSize: 12, fontWeight: "600" },
 });

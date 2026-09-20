@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ScrollView, View } from "react-native";
 import { Stack, router } from "expo-router";
 import { supabase } from "@/lib/supabase";
+import { errorMessage, toastMessage } from "@/lib/errors";
 import { useAuth } from "@/lib/auth-context";
 import { ErrorText, PrimaryButton, SegmentedControl } from "@/components/form";
 
@@ -84,7 +85,7 @@ export default function NewStockCountScreen() {
 
       router.replace(`/inventory/counts/${count.id}`);
     } catch (e) {
-      setError(e instanceof Error ? e.message : "শুরু করা যায়নি");
+      setError(errorMessage(e, "শুরু করা যায়নি"));
       setLoading(false);
     }
   }

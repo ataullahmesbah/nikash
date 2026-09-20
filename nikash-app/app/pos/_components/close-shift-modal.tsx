@@ -4,6 +4,7 @@ import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/lib/auth-context";
 import { useToast } from "@/lib/toast/toast-context";
 import type { ActiveShift } from "../index";
+import { theme } from "@/components/ui";
 
 export default function CloseShiftModal({
   visible,
@@ -124,7 +125,7 @@ const styles = StyleSheet.create({
     padding: 12,
     fontSize: 16,
     marginBottom: 8,
-  },
+   color: theme.text,},
   diff: { fontSize: 14, fontWeight: "700", marginBottom: 12 },
   actions: { flexDirection: "row", justifyContent: "flex-end", gap: 12, marginTop: 8 },
   cancel: { paddingVertical: 10, paddingHorizontal: 14 },

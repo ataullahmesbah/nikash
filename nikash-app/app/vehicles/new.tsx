@@ -5,6 +5,7 @@ import * as Crypto from "expo-crypto";
 import { useAuth } from "@/lib/auth-context";
 import { enqueueWriteAndSync } from "@/lib/offline/sync-queue";
 import { supabase } from "@/lib/supabase";
+import { errorMessage, toastMessage } from "@/lib/errors";
 import { useToast } from "@/lib/toast/toast-context";
 import { ErrorText, FormField, PrimaryButton } from "@/components/form";
 import { SkeletonDetail } from "@/components/skeleton";
@@ -77,7 +78,7 @@ export default function VehicleFormScreen() {
       }
       router.back();
     } catch (e) {
-      setError(e instanceof Error ? e.message : "সংরক্ষণ ব্যর্থ হয়েছে");
+      setError(errorMessage(e, "সংরক্ষণ ব্যর্থ হয়েছে"));
     } finally {
       setLoading(false);
     }

@@ -2,6 +2,7 @@ import { useCallback, useMemo, useState } from "react";
 import { FlatList, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Stack, router, useFocusEffect } from "expo-router";
 import { supabase } from "@/lib/supabase";
+import { errorMessage, toastMessage } from "@/lib/errors";
 import { useAuth } from "@/lib/auth-context";
 import { useToast } from "@/lib/toast/toast-context";
 import { formatDateBn, presetRange, taka, type DateRange } from "@/lib/format";
@@ -154,7 +155,7 @@ export default function PaymentLedgerScreen() {
       );
       load();
     } catch (e) {
-      const msg = e instanceof Error ? e.message : "বাতিল করা যায়নি";
+      const msg = errorMessage(e, "বাতিল করা যায়নি");
       toast.error(msg.length > 70 ? "বাতিল করা যায়নি" : msg);
     } finally {
       setBusy(false);

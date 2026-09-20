@@ -140,20 +140,17 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   logoWrap: {
-    width: 104,
-    height: 104,
+    // লোগোটা নিজেই গোল-চৌকো সবুজ, তাই পেছনে আর কোনো রঙের বাক্স নয় —
+    // শুধু ছায়াটুকু, যাতে পর্দা থেকে একটু উঠে থাকে।
     borderRadius: 26,
-    backgroundColor: "#E6F4FE",
-    alignItems: "center",
-    justifyContent: "center",
     // অ্যান্ড্রয়েডে elevation, iOS-এ shadow — দুটোই দিলাম
-    elevation: 3,
+    elevation: 4,
     shadowColor: "#0f172a",
-    shadowOpacity: 0.1,
-    shadowRadius: 12,
-    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.16,
+    shadowRadius: 14,
+    shadowOffset: { width: 0, height: 6 },
   },
-  logo: { width: 68, height: 68 },
+  logo: { width: 104, height: 104, borderRadius: 26 },
   name: {
     marginTop: 20,
     fontSize: 30,

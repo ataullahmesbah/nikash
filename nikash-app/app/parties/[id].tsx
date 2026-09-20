@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import { FlatList, Linking, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Stack, router, useFocusEffect, useLocalSearchParams } from "expo-router";
 import { supabase } from "@/lib/supabase";
+import { errorMessage, toastMessage } from "@/lib/errors";
 import { useAuth } from "@/lib/auth-context";
 import { useToast } from "@/lib/toast/toast-context";
 import { shareLedgerPdf, type LedgerEntry } from "@/lib/ledger-pdf";
@@ -153,7 +154,7 @@ export default function PartyDetailScreen() {
       }
       load();
     } catch (e) {
-      const msg = e instanceof Error ? e.message : "বদলানো যায়নি";
+      const msg = errorMessage(e, "বদলানো যায়নি");
       toast.error(msg.length > 70 ? "বদলানো যায়নি" : msg);
     } finally {
       setStatusBusy(false);

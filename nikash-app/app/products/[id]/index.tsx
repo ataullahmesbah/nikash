@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import { Stack, router, useFocusEffect, useLocalSearchParams } from "expo-router";
 import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import { supabase } from "@/lib/supabase";
+import { errorMessage, toastMessage } from "@/lib/errors";
 import { useAuth } from "@/lib/auth-context";
 import { useToast } from "@/lib/toast/toast-context";
 import { PrimaryButton } from "@/components/form";
@@ -80,7 +81,7 @@ export default function ProductVariantDetailScreen() {
       }
       router.back();
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : "মুছে ফেলা যায়নি");
+      toast.error(toastMessage(e, "মুছে ফেলা যায়নি"));
     } finally {
       setDeleting(false);
     }

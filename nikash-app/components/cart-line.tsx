@@ -1,4 +1,5 @@
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { theme } from "./ui";
 
 export type CartLine = {
   key: string;
@@ -98,6 +99,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 8,
     fontSize: 13,
-  },
+   color: theme.text,},
   totalValue: { fontSize: 14, fontWeight: "700", color: "#059669", paddingVertical: 8 },
 });
